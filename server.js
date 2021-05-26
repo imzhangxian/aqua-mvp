@@ -1,8 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
-const meters = require('./routes/api/meters.js')
-const stations = require('./routes/api/stations.js')
+const meters = require('./routes/api/meters.js');
+const stations = require('./routes/api/stations.js');
+
+const path = require('path');
 
 const cors = require('cors');
 
@@ -25,7 +27,14 @@ mongoose
 app.use('/api/meters', meters);
 app.use('/api/stations', stations);
 
-const port = 5000;
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
+
+const port = process.env.PORT || 5000;
 
 // start server
 app.listen(port, () => console.log(`Server started listening on port ${port}`));
