@@ -6,11 +6,7 @@ const stations = require('./routes/api/stations.js');
 
 const path = require('path');
 
-const cors = require('cors');
-
 const app = express();
-
-app.use(cors());
 
 app.use(express.json());
 

@@ -15,7 +15,7 @@ function MonitorMap() {
   const [stations, setStations] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/stations')
+    fetch('/api/stations')
     .then(res => res.json())
     .then(stations => {
       setStations(stations)

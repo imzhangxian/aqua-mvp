@@ -10,7 +10,7 @@ function MetersListPlain() {
   })
 
   const fetchMeters = () => {
-    fetch('http://localhost:5000/api/meters')
+    fetch('/api/meters')
     .then(res => res.json())
     .then(meters => {
       setMeters(meters)
