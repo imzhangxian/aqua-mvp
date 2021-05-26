@@ -31,7 +31,7 @@ function MonitorMap() {
     let green = Math.floor(0xFF * (100 - warninglevel) / 100);
     let color = "#" + (red < 0x10 ? "0" : "") + red.toString(16) 
                 + (green < 0x10 ? "0" : "") + green.toString(16) + "00";
-    console.log(`Color level of ${warninglevel} is ${color}`)
+    // console.log(`Color level of ${warninglevel} is ${color}`)
     return color;
   };
 
