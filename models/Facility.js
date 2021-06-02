@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // create Schema
-const StationSchema = new Schema ({
+const FacilitySchema = new Schema ({
   name: String,
   number: String,
   address: String,
@@ -11,4 +11,4 @@ const StationSchema = new Schema ({
   warninglevel: Number // 0-100 warning level
 });
 
-module.exports = Station = mongoose.model('station', StationSchema);
+module.exports = Facility = mongoose.model('facility', FacilitySchema);

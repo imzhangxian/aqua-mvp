@@ -20,7 +20,6 @@ function MetersListPlain() {
     });
   }
 
-
   return (
     <div className="accordion" id="devices">
       {meters.map(({ _id, name, number }) => (

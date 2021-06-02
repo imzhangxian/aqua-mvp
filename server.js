@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 const meters = require('./routes/api/meters.js');
-const stations = require('./routes/api/stations.js');
+const plants = require('./routes/api/plants.js');
 
 const path = require('path');
 
@@ -21,7 +21,7 @@ mongoose
 
 // routes
 app.use('/api/meters', meters);
-app.use('/api/stations', stations);
+app.use('/api/plants', plants);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));

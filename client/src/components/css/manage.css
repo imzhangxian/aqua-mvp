@@ -1,0 +1,18 @@
+.management-tab {
+  text-align: center;
+  /* margin: 0 auto;
+  width: 80%; */
+}
+
+.plants-table {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  font-size: 0.8rem;
+}
+
+.add-plant-ops {
+  margin: 1em;
+  font-size: 0.8rem;
+}
+

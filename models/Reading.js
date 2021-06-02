@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // create Schema
-const MonitoringDataSchema = new Schema ({
+const readingSchema = new Schema ({
   name: String,
   deviceType: String,
   deviceId: String,
@@ -11,4 +11,4 @@ const MonitoringDataSchema = new Schema ({
   createAt: Date
 });
 
-module.exports = MonitoringData = mongoose.model('monitoringdata', MonitoringDataSchema);
+module.exports = Reading = mongoose.model('Reading', readingSchema);

@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const Device = require('../../models/Device');
+const Equipment = require('../../models/Equipment');
 
-// @get api/meters retrieve all meters
+// @get api/equipment retrieve all meters
 router.get('/', (req, res) => {
-    Device.find()
+  Equipment.find()
       // .sort()
       .then(items => res.json(items));
   });  

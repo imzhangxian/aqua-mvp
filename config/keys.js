@@ -1,3 +1,3 @@
 module.exports = {
-  mongouri: "mongodb+srv://xian:PgMEmYGJHAD3zdP1@cluster0.yhwll.mongodb.net/mvp"
+  mongouri: "mongodb://localhost:27017/mvp"
 }

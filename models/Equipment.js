@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // create Schema
-const DeviceSchema = new Schema ({
+const equipmentSchema = new Schema ({
   name: String,
   number: String,
   spec: String,
@@ -10,4 +10,4 @@ const DeviceSchema = new Schema ({
   stationId: Object
 });
 
-module.exports = Device = mongoose.model('device', DeviceSchema);
+module.exports = Equipment = mongoose.model('equipment', equipmentSchema);
