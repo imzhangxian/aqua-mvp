@@ -63,21 +63,21 @@ function Equipments() {
   }, [loading]);
 
   return (
-    <div className="equipments-table">
-      <Button className="add-plant-ops" onClick={handleShow}>Add</Button>
+    <div className="aqua-item-list">
+      <Button className="aqua-item-add-btn" onClick={handleShow}>Add</Button>
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header>
-          <Modal.Title>Create Plant</Modal.Title>
+          <Modal.Title>Create Equipment</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form.Group controlId="create-plant-number">
+          <Form.Group controlId="create-equip-number">
             <Form.Label>Number</Form.Label>
-            <Form.Control type="text" placeholder="Enter plant number" 
+            <Form.Control type="text" placeholder="Enter equipment number" 
               onChange={e => { inputs.number = e.target.value }} />
           </Form.Group>
           <Form.Group controlId="create-plant-name">
             <Form.Label>Name</Form.Label>
-            <Form.Control type="text" placeholder="Enter plant name" 
+            <Form.Control type="text" placeholder="Enter equipment name" 
               onChange={e => { inputs.name = e.target.value }} />
           </Form.Group>
         </Modal.Body>
@@ -95,7 +95,9 @@ function Equipments() {
           <tr>
             <th>Number</th>
             <th>Name</th>
-            <th>Stages</th>
+            <th>Category</th>
+            <th>Type</th>
+            <th>Function</th>
             <th>Status</th>
             <th>Operations</th>
           </tr>
@@ -105,9 +107,11 @@ function Equipments() {
             <tr key={equip._id}>
               <td>{equip.number}</td>
               <td>{equip.name}</td>
-              <td>{equip.stages.map(stage => (`${stage.type} / `))}</td>
+              <td>{equip.category}</td>
+              <td>{equip.type}</td>
+              <td>{equip.function}</td>
               <td>{equip.status}</td>
-              <td><Button variant="danger" onClick={
+              <td><Button className="aqua-item-ops-btn" variant="danger" onClick={
                 () => {
                   if (window.confirm(`Sure to DELETE ${equip.name}`)) {
                     handleDelete(equip._id);

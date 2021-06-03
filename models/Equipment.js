@@ -5,9 +5,15 @@ const Schema = mongoose.Schema;
 const equipmentSchema = new Schema ({
   name: String,
   number: String,
-  spec: String,
-  manufacturer: String,
-  stationId: Object
+  category: String,
+  type: String,
+  subtype: String,
+  model: String,
+  function: String,
+  facility: String,
+  createAt: Date,
+  lastModified: Date,
+  status: String
 });
 
 module.exports = Equipment = mongoose.model('equipment', equipmentSchema);

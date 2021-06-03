@@ -5,10 +5,15 @@ const Schema = mongoose.Schema;
 const FacilitySchema = new Schema ({
   name: String,
   number: String,
-  address: String,
-  lat: Number,
-  longt: Number,
-  warninglevel: Number // 0-100 warning level
+  plant: String,
+  stage: String, 
+  equipments: [
+    {
+      sequence: Number, 
+      purpose: String, 
+      number: String
+    }
+  ]
 });
 
 module.exports = Facility = mongoose.model('facility', FacilitySchema);

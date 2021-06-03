@@ -13,7 +13,6 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 
 import './App.css';
 
-// import MetersListPlain from './components/MetersListPlain';
 import Navbar from './components/Navbar';
 import MonitorMap from './components/MonitorMap';
 import PlantOverview from './components/PlantOverview';

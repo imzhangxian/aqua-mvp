@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { Button, Table, Modal, Form } from 'react-bootstrap'
 
 import './css/manage.css'
@@ -8,27 +8,44 @@ function Facilities() {
   const [facilities, setFacilities] = useState([]);
   const [inputs, setInputs] = useState({});
   const [loading, setLoading] = useState(false);
+  const [selectedPlant, setSelectedPlant] = useState("");
+  const [selectedStage, setSelectedStage] = useState(0);
 
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
   const handleSubmit = () => {
     setShowModal(false);
     /** save facility */
+    console.log(`Preparing to insert - Number: ${inputs.number}, name: ${inputs.name}, plant: ${selectedPlant}, stage: ${selectedStage}`);
+    // saveFacility({
+    //   number: inputs.number,
+    //   name: inputs.name,
+    //   plant: selectedPlant,
+    //   stage: selectedStage
+    // });
   }
 
   const handleDelete = (id => {
-    /** delete facility */
+    setLoading(true);
+    fetch(`/api/facilities/${id}`, {method: 'DELETE'})
+      .then(res => res.json())
+      .then(data => {
+        setLoading(false);
+      })
+      .catch(e => console.log(e));
   });
 
-
   const saveFacility = (facility) => {
+    console.log(`Saving facility ... ${facility}`);
     setLoading(true);
     const createFacilityReq = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         number: facility.number,
-        name: facility.name
+        name: facility.name, 
+        plant: facility.plant,
+        stage: facility.stage
       })
     };
     fetch('/api/facilities/', createFacilityReq)
@@ -55,8 +72,8 @@ function Facilities() {
   }, [loading]);
 
   return (
-    <div className="Facilities-table">
-      <Button className="add-facility-ops" onClick={handleShow}>Add</Button>
+    <div className="aqua-item-list">
+      <Button className="aqua-item-add-btn" onClick={handleShow}>Add</Button>
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header>
           <Modal.Title>Create Facility</Modal.Title>
@@ -72,6 +89,9 @@ function Facilities() {
             <Form.Control type="text" placeholder="Enter facility name" 
               onChange={e => { inputs.name = e.target.value }} />
           </Form.Group>
+          <PlantSelector selectedPlant={selectedPlant} onPlantChange={setSelectedPlant} />
+          <StageSelector selectedPlant={selectedPlant} 
+            selectedStage={selectedStage} onStageChange={setSelectedStage} />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" type="submit" onClick={() => handleSubmit()}>
@@ -96,9 +116,8 @@ function Facilities() {
             <tr key={facility._id}>
               <td>{facility.number}</td>
               <td>{facility.name}</td>
-              <td>{facility.plant}</td>
               <td>{facility.status}</td>
-              <td><Button variant="danger" onClick={
+              <td><Button className="aqua-item-ops-btn" variant="danger" onClick={
                 () => {
                   if (window.confirm(`Sure to DELETE ${facility.name}?`)) {
                     handleDelete(facility._id);
@@ -110,6 +129,70 @@ function Facilities() {
         </tbody>
       </Table>
     </div>
+  );
+}
+
+function PlantSelector({ selectedPlant, onPlantChange}) {
+  const [plants, setPlants] = useState([]);
+  
+  useEffect(() => {
+    fetchPlants();
+  }, []);
+
+  const fetchPlants = () => {
+    setPlants([
+      {name: "New02", number: "NP01"}, 
+      {name: "New03", number: "NP02"}
+    ]);
+    onPlantChange("NP01");
+  }
+
+  const handleInputChange = useCallback(event => {
+    onPlantChange(event.target.value)
+  }, [onPlantChange])
+
+  return (
+    <Form.Group controlId="create-facility-plants">
+      <Form.Label>Plants</Form.Label>
+      <Form.Control as="select" onChange={handleInputChange} value={selectedPlant}>
+        {plants.map(plant => (
+          <option value={plant.number}>{`${plant.number} - ${plant.name}`}</option>
+        ))}
+      </Form.Control>
+    </Form.Group>
+  );
+}
+
+function StageSelector({selectedPlant, selectedStage, onStageChange }) {
+  const [stages, setStages] = useState([]);
+
+  useEffect(() => {
+    fetchStages(selectedPlant);
+  }, []);
+
+  const fetchStages = (selectedPlant) => {
+    // console.log(plantNo);
+    setStages([
+      {seq: 1, name: "Pre-treatment"}, 
+      {seq: 2, name: "Primary"}, 
+      {seq: 3, name: "Secondary"}
+    ]);
+    onStageChange(2);
+  }
+
+  const handleInputChange = useCallback(event => {
+    onStageChange(event.target.value)
+  }, [onStageChange])
+
+  return (
+    <Form.Group controlId="create-facility-plants">
+      <Form.Label>Stages</Form.Label>
+      <Form.Control as="select" value={selectedStage} onChange={handleInputChange}>
+        {stages.map(stage => (
+          <option value={stage.seq}>{`${stage.seq} - ${stage.name}`}</option>
+        ))}
+      </Form.Control>
+    </Form.Group>
   );
 }
 

@@ -18,8 +18,8 @@ function Plants() {
       name: inputs.name,
       address: inputs.address, 
       location: {
-        latitude: 31.3306,
-        longitude: 119.9832
+        latitude: inputs.latitude,
+        longitude: inputs.longitude
       }, 
       stages: inputs.stages,
       status: "Halt"
@@ -75,8 +75,8 @@ function Plants() {
   }, [loading]);
 
   return (
-    <div className="plants-table">
-      <Button className="add-plant-ops" onClick={handleShow}>Add</Button>
+    <div className="aqua-item-list">
+      <Button className="aqua-item-add-btn" onClick={handleShow}>Add</Button>
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header>
           <Modal.Title>Create Plant</Modal.Title>
@@ -144,7 +144,7 @@ function Plants() {
               <td>{plant.name}</td>
               <td>{plant.stages.map(stage => (`${stage.type} / `))}</td>
               <td>{plant.status}</td>
-              <td><Button variant="danger" onClick={
+              <td><Button className="aqua-item-ops-btn" variant="danger" onClick={
                 () => {
                   if (window.confirm(`Sure to DELETE ${plant.name}?`)) {
                     handleDelete(plant._id);

@@ -2,15 +2,18 @@
   text-align: center;
 }
 
-.plants-table {
+.aqua-item-list {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   font-size: 0.8rem;
 }
 
-.add-plant-ops {
+.aqua-item-add-btn {
   margin: 1em;
   font-size: 0.8rem;
 }
 
+.aqua-item-ops-btn {
+  font-size: 0.6rem;
+}
