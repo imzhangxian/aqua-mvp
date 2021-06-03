@@ -11,7 +11,7 @@ function StagesView() {
   }, []);
 
   const fetchStages = (number) => {
-    console.log(`fetch stage for plant ${number}`);
+    // console.log(`fetch stage for plant ${number}`);
     fetch('/api/plants/' + number + '/stages')
     .then(res => res.json())
     .then(stages => {

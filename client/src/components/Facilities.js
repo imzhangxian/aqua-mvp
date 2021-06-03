@@ -17,12 +17,12 @@ function Facilities() {
     setShowModal(false);
     /** save facility */
     console.log(`Preparing to insert - Number: ${inputs.number}, name: ${inputs.name}, plant: ${selectedPlant}, stage: ${selectedStage}`);
-    // saveFacility({
-    //   number: inputs.number,
-    //   name: inputs.name,
-    //   plant: selectedPlant,
-    //   stage: selectedStage
-    // });
+    saveFacility({
+      number: inputs.number,
+      name: inputs.name,
+      plant: selectedPlant,
+      stage: selectedStage
+    });
   }
 
   const handleDelete = (id => {
@@ -140,11 +140,15 @@ function PlantSelector({ selectedPlant, onPlantChange}) {
   }, []);
 
   const fetchPlants = () => {
-    setPlants([
-      {name: "New02", number: "NP01"}, 
-      {name: "New03", number: "NP02"}
-    ]);
-    onPlantChange("NP01");
+    fetch('/api/plants/')
+      .then(res => res.json())
+      .then(plants => {
+        setPlants(plants);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+    
   }
 
   const handleInputChange = useCallback(event => {
@@ -171,13 +175,16 @@ function StageSelector({selectedPlant, selectedStage, onStageChange }) {
   }, []);
 
   const fetchStages = (selectedPlant) => {
-    // console.log(plantNo);
-    setStages([
-      {seq: 1, name: "Pre-treatment"}, 
-      {seq: 2, name: "Primary"}, 
-      {seq: 3, name: "Secondary"}
-    ]);
-    onStageChange(2);
+    if (selectedPlant) {
+      fetch('/api/plants/' + selectedPlant + '/stages')
+        .then(res => res.json())
+        .then(stages => {
+          setStages(stages);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    }
   }
 
   const handleInputChange = useCallback(event => {
@@ -189,7 +196,7 @@ function StageSelector({selectedPlant, selectedStage, onStageChange }) {
       <Form.Label>Stages</Form.Label>
       <Form.Control as="select" value={selectedStage} onChange={handleInputChange}>
         {stages.map(stage => (
-          <option value={stage.seq}>{`${stage.seq} - ${stage.name}`}</option>
+          <option value={stage.type}>{`${stage.sequence} - ${stage.name}`}</option>
         ))}
       </Form.Control>
     </Form.Group>
