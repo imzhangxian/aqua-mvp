@@ -24,7 +24,7 @@ function MessagePanel() {
                             } else if (message.severity === 'warning') {
                                 messageClass = "alert alert-warning";
                             }
-                            return (<li class={messageClass}>{message.plant}, {message.stage}: {message.text}</li>)
+                            return (<li className={messageClass}>{message.plant}, {message.stage}: {message.text}</li>)
                         })
                         }
                     </ul>

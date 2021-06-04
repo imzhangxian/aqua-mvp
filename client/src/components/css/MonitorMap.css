@@ -7,12 +7,14 @@
     margin-left: auto;
     margin-right: auto;
     border: 1px solid grey;
+    position: relative;
 }
 
 .message-panel {
-    position: fixed;
-    right: -100%;
-    margin: 20px;
+    position: absolute;
+    right: 0;
+    visibility: hidden;
+    margin: 5px;
     width: 30%;
     height: 40vh;
     max-width: 320px;
@@ -25,13 +27,18 @@
 }
 
 .message-panel.active {
+    visibility: visible;
+}
+
+.message-panel-ctl {
+    position: absolute;
     right: 0;
+    margin: 10px;
+    z-index: 1;
 }
 
 .message-panel li {
     list-style: none;
-    margin: 0.5em 0;
-    padding: 0.5em;
-    border: 1px solid gray;
-    border-radius: 5px;
+    margin: 0.2em 0;
+    padding: 0.2em;
 }

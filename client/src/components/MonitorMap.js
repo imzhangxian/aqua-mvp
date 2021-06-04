@@ -83,10 +83,10 @@ function MonitorMap() {
             anchor="top"
             longitude={popupInfo.location.longitude}
             latitude={popupInfo.location.latitude}
-            closeOnClick={true}
+            closeOnClick={false}
             onClose={setPopupInfo}
           >
-            {`${popupInfo.name} : ${popupInfo.name}`}
+            <a href={`/plants/${popupInfo.number}`}>{popupInfo.name}</a>
           </Popup>
         )}
 

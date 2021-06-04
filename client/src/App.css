@@ -1,7 +1,6 @@
 
 .container {
     display: flex;
-    border: 1px solid tomato;
 }
 
 .main-pane  {
@@ -23,3 +22,12 @@ h3 {
     margin: 1em 0;
 }
 
+.reports-pane {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.aqua-reports {
+    width: 40%;
+    margin: 2em;
+}

@@ -1,15 +1,18 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { useParams } from 'react-router';
 
-function PlantOverview({ plantnumber }) {
+function PlantOverview() {
 
   const [plant, setPlant] = useState({});
 
+  let {number} = useParams();
+
   useEffect(() => {
-    fetchPlant(plantnumber);
+    fetchPlant();
   })
 
-  const fetchPlant = (number) => {
+  const fetchPlant = () => {
     fetch('/api/plants/' + number)
     .then(res => res.json())
     .then(plant => {

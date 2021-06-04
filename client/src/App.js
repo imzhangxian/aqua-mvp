@@ -18,6 +18,10 @@ import MonitorMap from './components/MonitorMap';
 import PlantOverview from './components/PlantOverview';
 import StagesView from './components/StagesView';
 import ManagementPane from './components/ManagementPane';
+import LineChart from "./components/reports/LineChart";
+import PieChart from "./components/reports/PieChart";
+import VerticalBar from "./components/reports/VerticalBar";
+import ScatterChart from "./components/reports/ScatterChart";
 
 function App() {
   return (
@@ -32,18 +36,18 @@ function App() {
                 </Card>
             </div>
           </Route>
-          <Route path="/plants">
+          <Route path="/plants/:number">
             <div className="info-right">
-              <PlantOverview plantnumber="P01" />
-              <StagesView plantnumber="P01" />
+              <PlantOverview />
+              <StagesView />
             </div>
           </Route>
           <Route path="/reports">
             <div className="main-pane reports-pane">
-                <Card>
-                  <Card.Title>Reports</Card.Title>
-                  <Card.Body>Coming Soon...</Card.Body>
-                </Card>
+                <LineChart />
+                <PieChart />
+                <VerticalBar />
+                <ScatterChart />
             </div>
           </Route>
           <Route path="/manage">

@@ -1,16 +1,19 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { useParams } from 'react-router';
 import './css/StagesView.css'
 
-function StagesView({ plantnumber }) {
+function StagesView() {
 
   const [stages, setStages] = useState([]);
 
-  useEffect(plantnumber => {
-    fetchStages(plantnumber);
+  let {number} = useParams();
+
+  useEffect(() => {
+    fetchStages();
   }, []);
 
-  const fetchStages = (number) => {
+  const fetchStages = () => {
     // console.log(`fetch stage for plant ${number}`);
     fetch('/api/plants/' + number + '/stages')
     .then(res => res.json())
@@ -39,19 +42,22 @@ function StagesView({ plantnumber }) {
             <div className="stage-detail influent">
               进水：
               <ul>
-                {Object.keys(stage.influent).map(key => (<li>{key} : {stage.influent[key]}</li>))}
+                {stage.influent && 
+                Object.keys(stage.influent).map(key => (<li>{key} : {stage.influent[key]}</li>))}
               </ul>
             </div>
             <div className="stage-detail processing">
               存量：
               <ul>
-              {Object.keys(stage.processing).map(key => (<li>{key} : {stage.processing[key]}</li>))}
+              {stage.processing && 
+              Object.keys(stage.processing).map(key => (<li>{key} : {stage.processing[key]}</li>))}
               </ul>
             </div>
             <div className="stage-detail effluent">
               出水：
               <ul>
-              {Object.keys(stage.effluent).map(key => (<li>{key} : {stage.effluent[key]}</li>))}
+              {stage.effluent && 
+              Object.keys(stage.effluent).map(key => (<li>{key} : {stage.effluent[key]}</li>))}
               </ul>
             </div>
           </div>
