@@ -15,7 +15,13 @@ function Equipments() {
     setShowModal(false);
     saveEquipment({
       number: inputs.number,
-      name: inputs.name
+      name: inputs.name,
+      category: inputs.category,
+      type: inputs.type,
+      subtype: inputs.subtype,
+      model: inputs.model,
+      facility: inputs.facility,
+      function: inputs.function
     });
   }
 
@@ -34,10 +40,7 @@ function Equipments() {
     const createEquipReq = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        number: equip.number,
-        name: equip.name
-      })
+      body: JSON.stringify(equip)
     };
     fetch('/api/equipments/', createEquipReq)
       .then(res => res.json())
@@ -72,13 +75,43 @@ function Equipments() {
         <Modal.Body>
           <Form.Group controlId="create-equip-number">
             <Form.Label>Number</Form.Label>
-            <Form.Control type="text" placeholder="Enter equipment number" 
+            <Form.Control type="text" placeholder="Enter equipment number"
               onChange={e => { inputs.number = e.target.value }} />
           </Form.Group>
-          <Form.Group controlId="create-plant-name">
+          <Form.Group controlId="create-equip-name">
             <Form.Label>Name</Form.Label>
-            <Form.Control type="text" placeholder="Enter equipment name" 
+            <Form.Control type="text" placeholder="Enter equipment name"
               onChange={e => { inputs.name = e.target.value }} />
+          </Form.Group>
+          <Form.Group controlId="create-equip-category">
+            <Form.Label>Category</Form.Label>
+            <Form.Control type="text" placeholder="<Machine | Meter>"
+              onChange={e => { inputs.category = e.target.value }} />
+          </Form.Group>
+          <Form.Group controlId="create-equip-type">
+            <Form.Label>Type</Form.Label>
+            <Form.Control type="text" placeholder="<Flow gauge | COD | BOD | ... >"
+              onChange={e => { inputs.type = e.target.value }} />
+          </Form.Group>
+          <Form.Group controlId="create-equip-subtype">
+            <Form.Label>Sub Type</Form.Label>
+            <Form.Control type="text" placeholder="<Mechanic | Electronic | ... >"
+              onChange={e => { inputs.subtype = e.target.value }} />
+          </Form.Group>
+          <Form.Group controlId="create-equip-model">
+            <Form.Label>Model</Form.Label>
+            <Form.Control type="text" placeholder="Manufacturer Model Name"
+              onChange={e => { inputs.model = e.target.value }} />
+          </Form.Group>
+          <Form.Group controlId="create-equip-function">
+            <Form.Label>Function</Form.Label>
+            <Form.Control type="text" placeholder="<Functionality of the equipment>"
+              onChange={e => { inputs.function = e.target.value }} />
+          </Form.Group>
+          <Form.Group controlId="create-equip-name">
+            <Form.Label>Installed Facility No. </Form.Label>
+            <Form.Control type="text" placeholder="<e.g. P01FC01 >"
+              onChange={e => { inputs.facility = e.target.value }} />
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>

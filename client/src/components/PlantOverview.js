@@ -1,12 +1,12 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 
-function PlantOverview() {
+function PlantOverview({ plantnumber }) {
 
   const [plant, setPlant] = useState({});
 
   useEffect(() => {
-    fetchPlant("P01");
+    fetchPlant(plantnumber);
   })
 
   const fetchPlant = (number) => {
@@ -23,7 +23,7 @@ function PlantOverview() {
   return (
     <div className='plant-attr'>
       <h3>{plant.name} ( {plant.number} )</h3>
-      
+
     </div>
   );
 

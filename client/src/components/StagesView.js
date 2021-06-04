@@ -2,12 +2,12 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import './css/StagesView.css'
 
-function StagesView() {
+function StagesView({ plantnumber }) {
 
   const [stages, setStages] = useState([]);
 
-  useEffect(() => {
-    fetchStages("P01");
+  useEffect(plantnumber => {
+    fetchStages(plantnumber);
   }, []);
 
   const fetchStages = (number) => {
@@ -49,7 +49,7 @@ function StagesView() {
               </ul>
             </div>
             <div className="stage-detail effluent">
-              出水： 
+              出水：
               <ul>
               {Object.keys(stage.effluent).map(key => (<li>{key} : {stage.effluent[key]}</li>))}
               </ul>

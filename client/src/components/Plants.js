@@ -12,19 +12,29 @@ function Plants() {
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
   const handleSubmit = () => {
-    setShowModal(false);
-    savePlant({
+    const facilityData = {
       number: inputs.number,
       name: inputs.name,
-      address: inputs.address, 
-      location: {
-        latitude: inputs.latitude,
-        longitude: inputs.longitude
-      }, 
+      address: inputs.address,
+      latitude: inputs.latitude,
+      longitude: inputs.longitude,
       stages: inputs.stages,
-      status: "Halt"
-    });
+      status: "Ready"
+    };
+    if (validateFacilityData(facilityData)) {
+      setShowModal(false);
+      savePlant(facilityData);
+    } else {
+      // TODO highlight invalid data field
+      window.alert('input data error')
+    }
   }
+  
+  const validateFacilityData = (facilityData => {
+    let result = true;
+    // TODO: validate data
+    return result;
+  });
 
   const handleDelete = (id => {
     setLoading(true);
@@ -42,14 +52,7 @@ function Plants() {
     const createPlantReq = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        number: plant.number,
-        name: plant.name,
-        address: plant.address,
-        latitude: plant.location.latitude, 
-        longitude: plant.location.longitude, 
-        stages: plant.stages
-      })
+      body: JSON.stringify(plant)
     };
     fetch('/api/plants/', createPlantReq)
       .then(res => res.json())
@@ -84,24 +87,26 @@ function Plants() {
         <Modal.Body>
           <Form.Group controlId="create-plant-number">
             <Form.Label>Number</Form.Label>
-            <Form.Control type="text" placeholder="Enter plant number" 
+            <Form.Control type="text" placeholder="Enter plant number"
               onChange={e => { inputs.number = e.target.value }} />
           </Form.Group>
           <Form.Group controlId="create-plant-name">
             <Form.Label>Name</Form.Label>
-            <Form.Control type="text" placeholder="Enter plant name" 
+            <Form.Control type="text" placeholder="Enter plant name"
               onChange={e => { inputs.name = e.target.value }} />
           </Form.Group>
           <Form.Group controlId="create-plant-address">
             <Form.Label>Address</Form.Label>
-            <Form.Control type="text" placeholder="Address" 
+            <Form.Control type="text" placeholder="Address"
               onChange={e => { inputs.address = e.target.value }} />
           </Form.Group>
-          <Form.Group controlId="create-plant-location">
+          <Form.Group controlId="create-plant-Latitude">
             <Form.Label>Location</Form.Label>
-            <Form.Control type="text" defaultValue={31.3306} placeholder="Latitude" 
+            <Form.Control type="text" placeholder="Latitude (-90~90), e.g. 31.3306"
               onChange={e => { inputs.latitude = e.target.value }} />
-            <Form.Control type="text" defaultValue={119.9832} placeholder="Longitude" 
+          </Form.Group>
+          <Form.Group controlId="create-plant-Longitude">
+            <Form.Control type="text" placeholder="Longitude (-180~180), e.g. 119.9832"
               onChange={e => { inputs.longitude = e.target.value }} />
           </Form.Group>
           <Form.Group controlId="create-plant-stages">

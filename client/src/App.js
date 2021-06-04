@@ -34,8 +34,8 @@ function App() {
           </Route>
           <Route path="/plants">
             <div className="info-right">
-              <PlantOverview />
-              <StagesView />
+              <PlantOverview plantnumber="P01" />
+              <StagesView plantnumber="P01" />
             </div>
           </Route>
           <Route path="/reports">
