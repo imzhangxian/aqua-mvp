@@ -1,14 +1,15 @@
 
 .container {
     display: flex;
+    min-height: 100vh;
+    max-width: none;
 }
 
 .main-pane  {
     margin: 1em auto;
-	width: 80%;
 }
 
-.info-right {
+.description-pane {
     width: 40%;
     margin: 0 auto;
 }

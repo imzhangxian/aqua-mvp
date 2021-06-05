@@ -13,9 +13,9 @@ function MessagePanel() {
     return (
         <div>
             <button className="btn btn-outline-primary message-panel-ctl" onClick={() => setShow(!show)}>+</button>
-            <div className={`message-panel ${show ? "active" : ""}`}>
-                <h3>Messages </h3>
-                <div className="message link">
+            <div className={`overflow-auto message-panel ${show ? "active" : ""}`}>
+                <h3>Messages</h3>
+                <div className="message-link">
                     <ul>
                         {messages.map(message => {
                             let messageClass = "alert alert-success";

@@ -15,8 +15,7 @@ import './App.css';
 
 import Navbar from './components/Navbar';
 import MonitorMap from './components/MonitorMap';
-import PlantOverview from './components/PlantOverview';
-import StagesView from './components/StagesView';
+import PlantDetails from './components/PlantDetails';
 import ManagementPane from './components/ManagementPane';
 import LineChart from "./components/reports/LineChart";
 import PieChart from "./components/reports/PieChart";
@@ -37,9 +36,8 @@ function App() {
             </div>
           </Route>
           <Route path="/plants/:number">
-            <div className="info-right">
-              <PlantOverview />
-              <StagesView />
+            <div className="description-pane">
+              <PlantDetails />
             </div>
           </Route>
           <Route path="/reports">

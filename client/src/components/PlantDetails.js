@@ -1,31 +1,38 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
-import './css/StagesView.css'
 
-function StagesView() {
+import './css/PlantDetails.css'
 
+function PlantDetails() {
+
+  const [plant, setPlant] = useState({});
   const [stages, setStages] = useState([]);
 
   let {number} = useParams();
 
   useEffect(() => {
-    fetchStages();
-  }, []);
-
-  const fetchStages = () => {
-    // console.log(`fetch stage for plant ${number}`);
-    fetch('/api/plants/' + number + '/stages')
+    fetch('/api/plants/' + number)
     .then(res => res.json())
-    .then(stages => {
-      setStages(stages);
+    .then(plant => {
+      setPlant(plant);
+      setStages(plant.stages);
     })
     .catch(e => {
       console.log(e);
     });
-  }
+  }, [number]);
 
+  /**
+   * for all components rendering with fetched data:
+   * first render will happen before data even fetched, so render will fail even before calling useEffect.
+   * solution is to initialize with data that makes the render not to fail, or to check the empty data before rendering.
+   */
   return (
+    <>
+    <div className='plant-attr'>
+      <h3>{plant.name} ( {plant.number} )</h3>
+    </div>
     <div className="accordion" id="devices">
       {stages.map(stage => (
         <div className="accordion-item" key={stage._id}>
@@ -65,8 +72,9 @@ function StagesView() {
       </div>
       ))}
     </div>
+    </>
   );
 
 }
 
-export default StagesView;
+export default PlantDetails;
