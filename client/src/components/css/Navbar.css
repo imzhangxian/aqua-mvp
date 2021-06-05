@@ -12,7 +12,7 @@
 .left-drawer {
     background-color: #060b46;
     max-width: 250px;
-    width: 30%;
+    width: 50%;
     height: 100%;
     position: fixed;
     padding: 1em 0;
@@ -28,15 +28,21 @@
 
 .left-drawer ul {
     display: flex;
-    flex-direction: column;
+    align-items: flex-start;
 }
 
-.left-drawer .nav-link {
+.left-drawer ul li {
+    width: 100%;
+    padding: 0 1.2em;
+}
+
+.left-drawer ul li a {
     color: #F5F5F5;
     text-decoration: none;
+    text-align: start;
 }
 
-.left-drawer .nav-link:hover {
+.left-drawer ul li a:hover {
     color: #9595E5;
     background-color: rgb(0, 81, 255);
 }

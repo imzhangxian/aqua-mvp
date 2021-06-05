@@ -12,7 +12,7 @@
     visibility: hidden;
     margin: 5px;
     width: 30%;
-    height: 40vh;
+    height: 60vh;
     min-width: 320px;
     background: #fff;
     box-shadow: 0 2px 4px rgba(0,0,0,0.3);
@@ -24,6 +24,7 @@
 
 .message-panel.active {
     visibility: visible;
+    transition: 800ms;
 }
 
 .message-panel-ctl {
@@ -41,4 +42,10 @@
     list-style: none;
     margin: 0.2em 0;
     padding: 0.2em;
+}
+
+.message-list {
+    height: 80%;
+    border: 1px solid grey;
+    padding: 5px;
 }
