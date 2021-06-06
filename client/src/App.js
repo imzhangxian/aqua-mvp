@@ -17,6 +17,9 @@ import Navbar from './components/Navbar';
 import MonitorMap from './components/MonitorMap';
 import PlantDetails from './components/PlantDetails';
 import ManagementPane from './components/ManagementPane';
+import About from './components/About'
+import ComingSoon from "./components/ComingSoon";
+
 import LineChart from "./components/reports/LineChart";
 import PieChart from "./components/reports/PieChart";
 import VerticalBar from "./components/reports/VerticalBar";
@@ -33,9 +36,7 @@ function App() {
         <Switch>
           <Route path="/about">
             <div className="main-pane home-about">
-                <Card>
-                  <Card.Body>{t('About text')}</Card.Body>
-                </Card>
+                <About />
             </div>
           </Route>
           <Route path="/plants/:number">
@@ -59,6 +60,16 @@ function App() {
           <Route path="/manage">
             <div className="main-pane manage-pane">
               <ManagementPane />
+            </div>
+          </Route>
+          <Route path="/bigdata">
+            <div className="main-pane home-blockchain">
+                <ComingSoon />
+            </div>
+          </Route>
+          <Route path="/blockchain">
+            <div className="main-pane home-about">
+                <ComingSoon />
             </div>
           </Route>
           <Route path="/">

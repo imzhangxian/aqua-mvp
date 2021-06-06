@@ -4,6 +4,7 @@
     height: 90vh;
     top: 0;
     position: relative;
+    border: 1px solid grey;
 }
 
 .message-panel {

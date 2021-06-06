@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react"
-import { HiGlobe, HiViewList, HiChartPie, HiServer, HiInformationCircle } from 'react-icons/hi'
+import { HiGlobe, HiViewList, HiChartPie, HiServer, HiInformationCircle, HiBeaker, HiOutlineLink } from 'react-icons/hi'
 import './css/Navbar.css'
 
 import { useTranslation } from 'react-i18next';
@@ -52,13 +52,19 @@ function Navbar() {
             <a className="nav-link" href="/plants"><HiViewList /> {t('Menu details')}</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/about"><HiInformationCircle /> {t('Menu about')}</a>
-          </li>
-          <li className="nav-item">
             <a className="nav-link" href="/reports"><HiChartPie /> {t('Menu reports')}</a>
           </li>
           <li className="nav-item">
             <a className="nav-link" href="/manage"><HiServer /> {t('Menu manage')}</a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" href="/bigdata"><HiBeaker /> {t('Menu bigdata')}</a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" href="/blockchain"><HiOutlineLink /> {t('Menu blockchain')}</a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" href="/about"><HiInformationCircle /> {t('Menu about')}</a>
           </li>
         </ul>
       </div>
