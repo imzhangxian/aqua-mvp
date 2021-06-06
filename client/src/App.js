@@ -43,6 +43,11 @@ function App() {
               <PlantDetails />
             </div>
           </Route>
+          <Route path="/plants">
+            <div className="description-pane">
+              <PlantDetails />
+            </div>
+          </Route>
           <Route path="/reports">
             <div className="main-pane reports-pane">
                 <LineChart />

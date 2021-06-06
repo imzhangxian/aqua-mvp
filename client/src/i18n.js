@@ -41,6 +41,12 @@ const resources = {
             "label.processing": "Processing",
             "label.effluent": "Effluent",
             "title.messages": "Messages",
+            "Pre-Treatment": "Pre-Treatment",
+            "Primary": "Primary",
+            "Secondary": "Secondary", 
+            "Tertiary": "Tertiary", 
+            "Fourth": "Fourth", 
+            "title.selectPlants": "Select a plant", 
             "placeholder": ""
         }
     },
@@ -75,11 +81,17 @@ const resources = {
             "label.stageType": "阶段",
             "label.address": "地址",
             "label.coordination": "坐标",
-            "label.stages": "阶段",
+            "label.stages": "包含阶段",
             "label.influent": "进水",
             "label.processing": "处理中",
             "label.effluent": "出水",
             "title.messages": "信息列表",
+            "Pre-Treatment": "预处理",
+            "Primary": "主处理",
+            "Secondary": "二次处理", 
+            "Tertiary": "三次处理", 
+            "Fourth": "四次处理", 
+            "title.selectPlants": "选择厂区", 
             "placeholder": ""
         }
     }

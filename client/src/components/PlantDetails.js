@@ -8,14 +8,40 @@ import { useTranslation } from 'react-i18next';
 
 function PlantDetails() {
 
-  const [plant, setPlant] = useState({});
+  const [plant, setPlant] = useState(null);
   const [stages, setStages] = useState([]);
+  const [plants, setPlants] = useState([]);
   const { t, i18n } = useTranslation();
 
   let {number} = useParams();
 
   useEffect(() => {
-    fetch('/api/plants/' + number)
+    if (number) {
+      fetch('/api/plants/' + number)
+      .then(res => res.json())
+      .then(plant => {
+        setPlant(plant);
+        setStages(plant.stages);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+    }
+  }, [number]);
+  
+  useEffect(() => {
+    fetch('/api/plants')
+    .then(res => res.json())
+    .then(plants => {
+      setPlants(plants);
+    })
+    .catch(e => {
+      console.log(e);
+    });
+  }, []);
+
+  const handleSelectionChange = e => {
+    fetch('/api/plants/' + e.target.value)
     .then(res => res.json())
     .then(plant => {
       setPlant(plant);
@@ -24,7 +50,7 @@ function PlantDetails() {
     .catch(e => {
       console.log(e);
     });
-  }, [number]);
+}
 
   /**
    * for all components rendering with fetched data:
@@ -33,8 +59,19 @@ function PlantDetails() {
    */
   return (
     <>
+    {!number && (<>
+    <select className="form-select" defaultValue="" aria-label="Default select example"
+      onChange={handleSelectionChange}>
+      <option value="">{t('title.selectPlants')}</option>
+      {plants && plants.map(p => (
+      <option value={p.number}>{p.name}</option>
+      ))}
+    </select>
+    </>)}
+    {plant && (
+    <>
     <div className='plant-attr'>
-      <h3>{plant.name} ( {plant.number} )</h3>
+      <h3>{plant.number} - {plant.name} </h3>
     </div>
     <div className="accordion" id="devices">
       {stages.map(stage => (
@@ -43,7 +80,7 @@ function PlantDetails() {
           <button className="accordion-button collapsed" type="button"
             data-bs-toggle="collapse" data-bs-target={"#collapse" + stage._id}
             aria-expanded="false" aria-controls={"collapse" + stage._id}>
-            {stage.name}
+            {t(stage.type)}
           </button>
         </h2>
         <div id={"collapse" + stage._id} className="accordion-collapse collapse"
@@ -75,6 +112,8 @@ function PlantDetails() {
       </div>
       ))}
     </div>
+    </>
+    )}
     </>
   );
 

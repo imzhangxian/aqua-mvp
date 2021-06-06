@@ -118,11 +118,11 @@ function Plants() {
                 let stages = [].slice.call(e.target.selectedOptions).map(item => item.value);
                 inputs.stages = stages;
               }}>
-              <option value="Pre-Treatment">Pre-Treatment</option>
-              <option value="Primary">Primary</option>
-              <option value="Secondary">Secondary</option>
-              <option value="Tertiary">Tertiary</option>
-              <option value="Fourth">Fourth</option>
+              <option value="Pre-Treatment">{t('Pre-Treatment')}</option>
+              <option value="Primary">{t('Primary')}</option>
+              <option value="Secondary">{t('Secondary')}</option>
+              <option value="Tertiary">{t('Tertiary')}</option>
+              <option value="Fourth">{t('Fourth')}</option>
             </Form.Control>
           </Form.Group>
         </Modal.Body>
@@ -150,7 +150,7 @@ function Plants() {
             <tr key={plant._id}>
               <td>{plant.number}</td>
               <td>{plant.name}</td>
-              <td>{plant.stages.map(stage => (`${stage.type} / `))}</td>
+              <td>{plant.stages.map(stage => (`${t(stage.type)} / `))}</td>
               <td>{plant.status}</td>
               <td><Button className="aqua-item-ops-btn" variant="danger" onClick={
                 () => {
