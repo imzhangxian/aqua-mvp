@@ -18,7 +18,7 @@
     padding: 1em 0;
     left: -100%;
     transition: 850ms;
-    z-index: 10;
+    z-index: 100;
 }
 
 .left-drawer.active {

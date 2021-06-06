@@ -4,10 +4,13 @@ import { useParams } from 'react-router';
 
 import './css/PlantDetails.css'
 
+import { useTranslation } from 'react-i18next';
+
 function PlantDetails() {
 
   const [plant, setPlant] = useState({});
   const [stages, setStages] = useState([]);
+  const { t, i18n } = useTranslation();
 
   let {number} = useParams();
 
@@ -47,21 +50,21 @@ function PlantDetails() {
           aria-labelledby={"heading" + stage._id} data-bs-parent="#devices">
           <div className="accordion-body stage-attrs">
             <div className="stage-detail influent">
-              进水：
+            {t('label.influent')} : 
               <ul>
                 {stage.influent && 
                 Object.keys(stage.influent).map(key => (<li>{key} : {stage.influent[key]}</li>))}
               </ul>
             </div>
             <div className="stage-detail processing">
-              存量：
+            {t('label.processing')} : 
               <ul>
               {stage.processing && 
               Object.keys(stage.processing).map(key => (<li>{key} : {stage.processing[key]}</li>))}
               </ul>
             </div>
             <div className="stage-detail effluent">
-              出水：
+            {t('label.effluent')} : 
               <ul>
               {stage.effluent && 
               Object.keys(stage.effluent).map(key => (<li>{key} : {stage.effluent[key]}</li>))}

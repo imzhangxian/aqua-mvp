@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react'
 import { Button, Table, Modal, Form } from 'react-bootstrap'
 
 import './css/manage.css'
+import { useTranslation } from 'react-i18next';
 
 function Equipments() {
   const [showModal, setShowModal] = useState(false);
   const [equipments, setEquipments] = useState([]);
   const [inputs, setInputs] = useState({});
   const [loading, setLoading] = useState(false);
+
+  const { t, i18n } = useTranslation();
 
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
@@ -67,72 +70,72 @@ function Equipments() {
 
   return (
     <div className="aqua-item-list">
-      <Button className="aqua-item-add-btn" onClick={handleShow}>Add</Button>
+      <Button className="aqua-item-add-btn" onClick={handleShow}>{t('btn.add')}</Button>
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header>
-          <Modal.Title>Create Equipment</Modal.Title>
+          <Modal.Title>{t('modal.createEquipment')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form.Group controlId="create-equip-number">
-            <Form.Label>Number</Form.Label>
+            <Form.Label>{t('label.number')}</Form.Label>
             <Form.Control type="text" placeholder="Enter equipment number"
               onChange={e => { inputs.number = e.target.value }} />
           </Form.Group>
           <Form.Group controlId="create-equip-name">
-            <Form.Label>Name</Form.Label>
+            <Form.Label>{t('label.name')}</Form.Label>
             <Form.Control type="text" placeholder="Enter equipment name"
               onChange={e => { inputs.name = e.target.value }} />
           </Form.Group>
           <Form.Group controlId="create-equip-category">
-            <Form.Label>Category</Form.Label>
+            <Form.Label>{t('label.category')}</Form.Label>
             <Form.Control type="text" placeholder="<Machine | Meter>"
               onChange={e => { inputs.category = e.target.value }} />
           </Form.Group>
           <Form.Group controlId="create-equip-type">
-            <Form.Label>Type</Form.Label>
+            <Form.Label>{t('label.type')}</Form.Label>
             <Form.Control type="text" placeholder="<Flow gauge | COD | BOD | ... >"
               onChange={e => { inputs.type = e.target.value }} />
           </Form.Group>
           <Form.Group controlId="create-equip-subtype">
-            <Form.Label>Sub Type</Form.Label>
+            <Form.Label>{t('label.subtype')}</Form.Label>
             <Form.Control type="text" placeholder="<Mechanic | Electronic | ... >"
               onChange={e => { inputs.subtype = e.target.value }} />
           </Form.Group>
           <Form.Group controlId="create-equip-model">
-            <Form.Label>Model</Form.Label>
+            <Form.Label>{t('label.model')}</Form.Label>
             <Form.Control type="text" placeholder="Manufacturer Model Name"
               onChange={e => { inputs.model = e.target.value }} />
           </Form.Group>
           <Form.Group controlId="create-equip-function">
-            <Form.Label>Function</Form.Label>
+            <Form.Label>{t('label.function')}</Form.Label>
             <Form.Control type="text" placeholder="<Functionality of the equipment>"
               onChange={e => { inputs.function = e.target.value }} />
           </Form.Group>
           <Form.Group controlId="create-equip-name">
-            <Form.Label>Installed Facility No. </Form.Label>
+            <Form.Label>{t('label.assctFacility')}</Form.Label>
             <Form.Control type="text" placeholder="<e.g. P01FC01 >"
               onChange={e => { inputs.facility = e.target.value }} />
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" type="submit" onClick={() => handleSubmit()}>
-            Submit
+          {t('btn.submit')}
         </Button>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+          {t('btn.close')}
         </Button>
         </Modal.Footer>
       </Modal>
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>Number</th>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Type</th>
-            <th>Function</th>
-            <th>Status</th>
-            <th>Operations</th>
+            <th>{t('label.number')}</th>
+            <th>{t('label.name')}</th>
+            <th>{t('label.category')}</th>
+            <th>{t('label.type')}</th>
+            <th>{t('label.function')}</th>
+            <th>{t('label.status')}</th>
+            <th>{t('label.operations')}</th>
           </tr>
         </thead>
         <tbody>

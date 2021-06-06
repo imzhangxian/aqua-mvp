@@ -22,7 +22,10 @@ import PieChart from "./components/reports/PieChart";
 import VerticalBar from "./components/reports/VerticalBar";
 import ScatterChart from "./components/reports/ScatterChart";
 
+import { useTranslation } from 'react-i18next';
+
 function App() {
+  const { t, i18n } = useTranslation();
   return (
     <Router>
       <Navbar />
@@ -31,7 +34,7 @@ function App() {
           <Route path="/about">
             <div className="main-pane home-about">
                 <Card>
-                  <Card.Body>Smart Water project.</Card.Body>
+                  <Card.Body>{t('About text')}</Card.Body>
                 </Card>
             </div>
           </Route>

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useState, useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 function MessagePanel() {
     const [showMessages, setShowMessages] = useState(false);
@@ -9,6 +10,8 @@ function MessagePanel() {
         { severity: "warning", plant: "New Plant 02", stage: "Primary", text: "BOD under standard." },
         { severity: "severe", plant: "Plant 05", stage: "Primary", text: "exceed max capacity!!" }
     ]);
+    
+    const { t, i18n } = useTranslation();
 
     const messagepopup = useRef();
     const togglebutton = useRef();
@@ -35,7 +38,7 @@ function MessagePanel() {
         <div>
             <button ref={togglebutton} className="btn btn-outline-primary message-panel-ctl" onClick={() => setShowMessages(!showMessages)}>+</button>
             <div ref={messagepopup} className={`message-panel ${showMessages ? "active" : ""}`}>
-                <h3>Messages</h3>
+                <h3>{t('title.messages')}</h3>
                 <div className="overflow-auto message-list">
                     <ul>
                         {messages.map(message => {

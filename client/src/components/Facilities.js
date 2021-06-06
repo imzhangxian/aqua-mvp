@@ -3,11 +3,15 @@ import { Button, Table, Modal, Form } from 'react-bootstrap'
 
 import './css/manage.css'
 
+import { useTranslation } from 'react-i18next';
+
 function Facilities() {
   const [showModal, setShowModal] = useState(false);
   const [facilities, setFacilities] = useState([]);
   const [inputs, setInputs] = useState({});
   const [loading, setLoading] = useState(false);
+
+  const { t, i18n } = useTranslation();
 
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
@@ -65,49 +69,49 @@ function Facilities() {
 
   return (
     <div className="aqua-item-list">
-      <Button className="aqua-item-add-btn" onClick={handleShow}>Add</Button>
+      <Button className="aqua-item-add-btn" onClick={handleShow}>{t('btn.add')}</Button>
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header>
-          <Modal.Title>Create Facility</Modal.Title>
+          <Modal.Title>{t('modal.createFacility')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form.Group controlId="create-facility-number">
-            <Form.Label>Number</Form.Label>
+            <Form.Label>{t('label.number')}</Form.Label>
             <Form.Control type="text" placeholder="Enter facility number"
               onChange={e => { inputs.number = e.target.value }} />
           </Form.Group>
           <Form.Group controlId="create-facility-name">
-            <Form.Label>Name</Form.Label>
+            <Form.Label>{t('label.name')}</Form.Label>
             <Form.Control type="text" placeholder="Enter facility name"
               onChange={e => { inputs.name = e.target.value }} />
           </Form.Group>
           <Form.Group controlId="create-facility-plant">
-            <Form.Label>Plant Number</Form.Label>
+            <Form.Label>{t('label.plantNumber')}</Form.Label>
             <Form.Control type="text" placeholder="Enter plant number"
               onChange={e => { inputs.plant = e.target.value }} />
           </Form.Group>
           <Form.Group controlId="create-facility-stage">
-            <Form.Label>Stage Type</Form.Label>
+            <Form.Label>{t('label.stageType')}</Form.Label>
             <Form.Control type="text" placeholder="Enter facility stage"
               onChange={e => { inputs.stage = e.target.value }} />
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" type="submit" onClick={() => handleSubmit()}>
-            Submit
+          {t('btn.submit')}
         </Button>
         <Button variant="secondary" onClick={handleClose}>
-            Close
+        {t('btn.close')}
         </Button>
         </Modal.Footer>
       </Modal>
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>Number</th>
-            <th>Name</th>
-            <th>Status</th>
-            <th>Operations</th>
+            <th>{t('label.number')}</th>
+            <th>{t('label.name')}</th>
+            <th>{t('label.status')}</th>
+            <th>{t('label.operations')}</th>
           </tr>
         </thead>
         <tbody>

@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react'
 import { Button, Table, Modal, Form } from 'react-bootstrap'
 
 import './css/manage.css'
+import { useTranslation } from 'react-i18next';
 
 function Plants() {
   const [showModal, setShowModal] = useState(false);
   const [plants, setPlants] = useState([]);
   const [inputs, setInputs] = useState({});
   const [loading, setLoading] = useState(false);
+
+  const { t, i18n } = useTranslation();
 
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
@@ -79,29 +82,29 @@ function Plants() {
 
   return (
     <div className="aqua-item-list">
-      <Button className="aqua-item-add-btn" onClick={handleShow}>Add</Button>
+      <Button className="aqua-item-add-btn" onClick={handleShow}>{t('btn.add')}</Button>
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header>
-          <Modal.Title>Create Plant</Modal.Title>
+          <Modal.Title>{t('modal.createPlant')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form.Group controlId="create-plant-number">
-            <Form.Label>Number</Form.Label>
+            <Form.Label>{t('label.number')}</Form.Label>
             <Form.Control type="text" placeholder="Enter plant number"
               onChange={e => { inputs.number = e.target.value }} />
           </Form.Group>
           <Form.Group controlId="create-plant-name">
-            <Form.Label>Name</Form.Label>
+            <Form.Label>{t('label.name')}</Form.Label>
             <Form.Control type="text" placeholder="Enter plant name"
               onChange={e => { inputs.name = e.target.value }} />
           </Form.Group>
           <Form.Group controlId="create-plant-address">
-            <Form.Label>Address</Form.Label>
+            <Form.Label>{t('label.address')}</Form.Label>
             <Form.Control type="text" placeholder="Address"
               onChange={e => { inputs.address = e.target.value }} />
           </Form.Group>
           <Form.Group controlId="create-plant-Latitude">
-            <Form.Label>Location</Form.Label>
+            <Form.Label>{t('label.coordinate')}</Form.Label>
             <Form.Control type="text" placeholder="Latitude (-90~90), e.g. 31.3306"
               onChange={e => { inputs.latitude = e.target.value }} />
           </Form.Group>
@@ -110,7 +113,7 @@ function Plants() {
               onChange={e => { inputs.longitude = e.target.value }} />
           </Form.Group>
           <Form.Group controlId="create-plant-stages">
-            <Form.Label>Stages</Form.Label>
+            <Form.Label>{t('label.stages')}</Form.Label>
             <Form.Control as="select" multiple onChange={e => {
                 let stages = [].slice.call(e.target.selectedOptions).map(item => item.value);
                 inputs.stages = stages;
@@ -125,21 +128,21 @@ function Plants() {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" type="submit" onClick={() => handleSubmit()}>
-            Submit
+          {t('btn.submit')}
         </Button>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+          {t('btn.close')}
         </Button>
         </Modal.Footer>
       </Modal>
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>Number</th>
-            <th>Name</th>
-            <th>Stages</th>
-            <th>Status</th>
-            <th>Operations</th>
+            <th>{t('label.number')}</th>
+            <th>{t('label.name')}</th>
+            <th>{t('label.stages')}</th>
+            <th>{t('label.status')}</th>
+            <th>{t('label.operations')}</th>
           </tr>
         </thead>
         <tbody>

@@ -4,10 +4,13 @@ import Plants from './Plants'
 import Facilities from './Facilities'
 import Equipments from './Equipments'
 
+import { useTranslation } from 'react-i18next';
+
 import './css/manage.css'
 
 function ManagementPane() {
   const [key, setKey] = useState('plants');
+  const { t, i18n } = useTranslation();
 
   return (
     <div className="management-tab">
@@ -16,13 +19,13 @@ function ManagementPane() {
       activeKey={key}
       onSelect={(k) => setKey(k)}
     >
-      <Tab eventKey="plants" title="Plants">
+      <Tab eventKey="plants" title={t('Tab plants')}>
         <Plants />
       </Tab>
-      <Tab eventKey="facilities" title="Facilities">
+      <Tab eventKey="facilities" title={t('Tab facilities')}>
         <Facilities />
       </Tab>
-      <Tab eventKey="equipments" title="Equipments">
+      <Tab eventKey="equipments" title={t('Tab equipments')}>
         <Equipments />
       </Tab>
     </Tabs>

@@ -2,8 +2,13 @@ import React, { useState, useEffect, useRef } from "react"
 import { HiGlobe, HiViewList, HiChartPie, HiServer, HiInformationCircle } from 'react-icons/hi'
 import './css/Navbar.css'
 
+import { useTranslation } from 'react-i18next';
+
 function Navbar() {
+
     const [sidebar, setSidebar] = useState(false);
+
+    const { t, i18n } = useTranslation();
 
     const showSidebar = () => {
         setSidebar(! sidebar);
@@ -36,24 +41,24 @@ function Navbar() {
         <button ref={togglebutton} className="navbar-toggler" type="button" onClick={showSidebar}>
           <span className="navbar-toggler-icon"></span>
         </button>
-        <span className="navbar-brand mb-0 h1">Smart Water Integral</span>
+        <span className="navbar-brand mb-0 h1">{t('Nav title')}</span>
       </nav>
       <div ref={leftdrawer} className={sidebar ? 'left-drawer active' : 'left-drawer'}>
         <ul className="nav nav-pills nav-fill">
           <li className="nav-item">
-            <a className="nav-link" href="/"><HiGlobe /> Home</a>
+            <a className="nav-link" href="/"><HiGlobe /> {t('Menu home')}</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/plants"><HiViewList /> Plants</a>
+            <a className="nav-link" href="/plants"><HiViewList /> {t('Menu details')}</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/about"><HiInformationCircle /> About</a>
+            <a className="nav-link" href="/about"><HiInformationCircle /> {t('Menu about')}</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/reports"><HiChartPie /> Reports</a>
+            <a className="nav-link" href="/reports"><HiChartPie /> {t('Menu reports')}</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/manage"><HiServer /> Manage</a>
+            <a className="nav-link" href="/manage"><HiServer /> {t('Menu manage')}</a>
           </li>
         </ul>
       </div>
