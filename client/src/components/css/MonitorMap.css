@@ -49,6 +49,7 @@
     height: 80%;
     border: 1px solid grey;
     padding: 5px;
+    border-radius: 5px;
 }
 
 .mapboxgl-ctrl-bottom-left, .mapboxgl-ctrl-bottom-right {
