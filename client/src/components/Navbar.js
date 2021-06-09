@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react"
-import { HiGlobe, HiViewList, HiChartPie, HiServer, HiInformationCircle, HiBeaker, HiOutlineLink } from 'react-icons/hi'
 import './css/Navbar.css'
+import navMenu from './MenuItems.js'
 
 import { useTranslation } from 'react-i18next';
 
@@ -45,27 +45,11 @@ function Navbar() {
       </nav>
       <div ref={leftdrawer} className={sidebar ? 'left-drawer active' : 'left-drawer'}>
         <ul className="nav nav-pills nav-fill">
+        {navMenu.map(item => (
           <li className="nav-item">
-            <a className="nav-link" href="/"><HiGlobe /> {t('Menu home')}</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="/plants"><HiViewList /> {t('Menu details')}</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="/reports"><HiChartPie /> {t('Menu reports')}</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="/manage"><HiServer /> {t('Menu manage')}</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="/bigdata"><HiBeaker /> {t('Menu bigdata')}</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="/blockchain"><HiOutlineLink /> {t('Menu blockchain')}</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="/about"><HiInformationCircle /> {t('Menu about')}</a>
-          </li>
+          <a className="nav-link" href={item.menuLink}><item.iconComponent /> {t(item.menuName)}</a>
+        </li>
+        ))}
         </ul>
       </div>
       </>
