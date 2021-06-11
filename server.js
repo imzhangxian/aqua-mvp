@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const plants = require('./routes/api/plants.js');
 const facilities = require('./routes/api/facilities.js');
 const equipments = require('./routes/api/equipments.js');
+const users = require('./routes/api/users.js');
 const login = require('./routes/login.js');
 const auth = require('./middleware/auth');
 
@@ -27,6 +28,7 @@ app.use('/api', auth);
 app.use('/api/plants', plants);
 app.use('/api/facilities', facilities);
 app.use('/api/equipments', equipments);
+app.use('/api/users', users);
 app.use('/login', login)
 
 if (process.env.NODE_ENV === 'production') {
