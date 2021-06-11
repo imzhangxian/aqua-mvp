@@ -1,14 +1,20 @@
-import React, { useState, useEffect, useRef } from "react"
-import './css/Navbar.css'
-import navMenu from './MenuItems.js'
+import React, { useState, useEffect, useRef } from "react";
+import './css/Navbar.css';
+import navMenu from './MenuItems.js';
+import { useHistory } from "react-router-dom";
 
 import { useTranslation } from 'react-i18next';
 
 function Navbar() {
 
     const [sidebar, setSidebar] = useState(false);
+    const [token, setToken] = useState(
+      sessionStorage.getItem('token')
+    );
 
     const { t, i18n } = useTranslation();
+
+    const history = useHistory();
 
     const showSidebar = () => {
         setSidebar(! sidebar);
@@ -35,6 +41,12 @@ function Navbar() {
       setSidebar(false);
     };
 
+    const handleLogout = e => {
+      sessionStorage.removeItem('token');
+      setToken(null);
+      history.push('/login');
+    }
+
     return (
       <>
       <nav className="nav navbar-dark bg-dark nav-header">
@@ -42,6 +54,10 @@ function Navbar() {
           <span className="navbar-toggler-icon"></span>
         </button>
         <span className="navbar-brand mb-0 h1">{t('Nav title')}</span>
+        {token && <button className="navbar-toggler btn-logout" type="button" onClick={handleLogout}>
+          <span>{t('btn.logout')}</span>
+        </button>
+        }        
       </nav>
       <div ref={leftdrawer} className={sidebar ? 'left-drawer active' : 'left-drawer'}>
         <ul className="nav nav-pills nav-fill">

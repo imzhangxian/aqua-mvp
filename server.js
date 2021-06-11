@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const plants = require('./routes/api/plants.js');
 const facilities = require('./routes/api/facilities.js');
 const equipments = require('./routes/api/equipments.js');
+const login = require('./routes/login.js');
+const auth = require('./middleware/auth');
 
 const path = require('path');
 
@@ -21,9 +23,11 @@ mongoose
   .catch(err => console.log(err));
 
 // routes
+app.use('/api', auth);
 app.use('/api/plants', plants);
 app.use('/api/facilities', facilities);
 app.use('/api/equipments', equipments);
+app.use('/login', login)
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));

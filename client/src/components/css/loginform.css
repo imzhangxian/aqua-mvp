@@ -1,0 +1,10 @@
+.login-form {
+    margin: 1em auto auto;
+    padding: 1em 1em;
+    border: 1px solid grey;
+    border-radius: 5px;
+}
+
+.form-group {
+    margin-bottom: 1em;
+}

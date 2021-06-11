@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from "react-router-dom";
-import { Card } from "react-bootstrap"
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -19,6 +19,7 @@ import PlantDetails from './components/PlantDetails';
 import ManagementPane from './components/ManagementPane';
 import About from './components/About'
 import ComingSoon from "./components/ComingSoon";
+import LoginForm from "./components/LoginForm";
 
 import LineChart from "./components/reports/LineChart";
 import PieChart from "./components/reports/PieChart";
@@ -29,52 +30,71 @@ import { useTranslation } from 'react-i18next';
 
 function App() {
   const { t, i18n } = useTranslation();
+  const [loggedIn, setLoggedIn] = useState(sessionStorage.getItem('token') ? true : false);
+
   return (
     <Router>
       <Navbar />
       <div className="container">
         <Switch>
+          <Route path="/login">
+            <div className="main-pane">
+                <LoginForm setLoggedIn={ setLoggedIn } />
+            </div>
+          </Route>
           <Route path="/about">
             <div className="main-pane home-about">
                 <About />
             </div>
           </Route>
-          <Route path="/plants/:number">
+          {loggedIn ? <Route path="/plants/:number">
             <div className="description-pane">
               <PlantDetails />
             </div>
-          </Route>
+          </Route> : <Redirect to='/login' /> }
           <Route path="/plants">
+          {loggedIn ? 
             <div className="description-pane">
               <PlantDetails />
             </div>
-          </Route>
-          <Route path="/reports">
+           : <Redirect to='/login' /> }
+           </Route>
+           <Route path="/reports">
+          {loggedIn ? 
             <div className="main-pane reports-pane">
                 <LineChart />
                 <PieChart />
                 <VerticalBar />
                 <ScatterChart />
             </div>
-          </Route>
-          <Route path="/manage">
+           : <Redirect to='/login' /> }
+           </Route>
+           <Route path="/manage">
+          {loggedIn ? 
             <div className="main-pane manage-pane">
               <ManagementPane />
             </div>
-          </Route>
-          <Route path="/bigdata">
+           : <Redirect to='/login' /> }
+           </Route>
+           <Route path="/bigdata">
+          {loggedIn ? 
             <div className="main-pane home-blockchain">
                 <ComingSoon />
             </div>
-          </Route>
-          <Route path="/blockchain">
+           : <Redirect to='/login' /> }
+           </Route>
+           <Route path="/blockchain">
+          {loggedIn ? 
             <div className="main-pane home-about">
                 <ComingSoon />
             </div>
-          </Route>
-          <Route path="/">
+           : <Redirect to='/login' /> }
+           </Route>
+           <Route path="/">
+          {loggedIn ? 
             <MonitorMap />
-          </Route>
+           : <Redirect to='/login' /> }
+           </Route>
         </Switch>
       </div>
     </Router>

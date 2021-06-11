@@ -17,7 +17,14 @@ function PlantDetails() {
 
   useEffect(() => {
     if (number) {
-      fetch('/api/plants/' + number)
+      const token = sessionStorage.getItem('token');
+      console.log(token);
+      fetch('/api/plants/' + number, { 
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': `Bearer ${token}`
+        }
+      })
       .then(res => res.json())
       .then(plant => {
         setPlant(plant);
@@ -30,7 +37,13 @@ function PlantDetails() {
   }, [number]);
   
   useEffect(() => {
-    fetch('/api/plants')
+    const token = sessionStorage.getItem('token');
+    fetch('/api/plants', { 
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`
+      }
+    })
     .then(res => res.json())
     .then(plants => {
       setPlants(plants);
@@ -41,7 +54,13 @@ function PlantDetails() {
   }, []);
 
   const handleSelectionChange = e => {
-    fetch('/api/plants/' + e.target.value)
+    const token = sessionStorage.getItem('token');
+    fetch('/api/plants/' + e.target.value, { 
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`
+      }
+    })
     .then(res => res.json())
     .then(plant => {
       setPlant(plant);
