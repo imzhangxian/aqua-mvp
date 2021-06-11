@@ -1,8 +1,8 @@
 
 .container {
     display: flex;
-    min-height: 100vh;
-    max-width: none;
+    min-height: 90vh;
+    /* max-width: none; */
 }
 
 .main-pane  {

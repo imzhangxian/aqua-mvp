@@ -20,7 +20,9 @@ function PulsatingDot({ plant, onClick }) {
   }
 
   return (
-    <div className={classname} onClick={() => onClick(plant)}/>
+    <div className={classname}>
+      <div className="pin" onClick={() => onClick(plant)} />
+    </div>
   );
 }
 
