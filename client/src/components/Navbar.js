@@ -1,16 +1,15 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import './css/Navbar.css';
 import navMenu from './MenuItems.js';
 import { useHistory } from "react-router-dom";
 
 import { useTranslation } from 'react-i18next';
+import { AuthContext } from "../context/AuthContext";
 
 function Navbar() {
 
     const [sidebar, setSidebar] = useState(false);
-    const [token, setToken] = useState(
-      sessionStorage.getItem('token')
-    );
+    const {user, setUser} = useContext(AuthContext);
 
     const { t, i18n } = useTranslation();
 
@@ -42,8 +41,8 @@ function Navbar() {
     };
 
     const handleLogout = e => {
-      sessionStorage.removeItem('token');
-      setToken(null);
+      setUser(null);
+      sessionStorage.removeItem('user');
       history.push('/login');
     }
 
@@ -54,8 +53,8 @@ function Navbar() {
           <span className="navbar-toggler-icon"></span>
         </button>
         <span className="navbar-brand mb-0 h1">{t('Nav title')}</span>
-        {token && <button className="navbar-toggler btn-logout" type="button" onClick={handleLogout}>
-          <span>{t('btn.logout')}</span>
+        {user && <button className="navbar-toggler btn-logout" type="button" onClick={handleLogout}>
+          <span>{t('btn.logout') + user.username}</span>
         </button>
         }        
       </nav>

@@ -1,10 +1,11 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router';
 
 import './css/PlantDetails.css'
 
 import { useTranslation } from 'react-i18next';
+import { AuthContext } from '../context/AuthContext';
 
 function PlantDetails() {
 
@@ -12,17 +13,17 @@ function PlantDetails() {
   const [stages, setStages] = useState([]);
   const [plants, setPlants] = useState([]);
   const { t, i18n } = useTranslation();
+  const { user } = useContext(AuthContext);
 
   let {number} = useParams();
 
   useEffect(() => {
     if (number) {
-      const token = sessionStorage.getItem('token');
-      console.log(token);
+      
       fetch('/api/plants/' + number, { 
         headers: {
           "Content-Type": "application/json",
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${user.token}`
         }
       })
       .then(res => res.json())
@@ -34,14 +35,13 @@ function PlantDetails() {
         console.log(e);
       });
     }
-  }, [number]);
+  }, [number, user]);
   
   useEffect(() => {
-    const token = sessionStorage.getItem('token');
     fetch('/api/plants', { 
       headers: {
         "Content-Type": "application/json",
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${user.token}`
       }
     })
     .then(res => res.json())
@@ -51,14 +51,13 @@ function PlantDetails() {
     .catch(e => {
       console.log(e);
     });
-  }, []);
+  }, [user]);
 
   const handleSelectionChange = e => {
-    const token = sessionStorage.getItem('token');
     fetch('/api/plants/' + e.target.value, { 
       headers: {
         "Content-Type": "application/json",
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${user.token}`
       }
     })
     .then(res => res.json())

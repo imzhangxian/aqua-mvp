@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 import { Button, Form } from 'react-bootstrap'
+import { AuthContext } from '../context/AuthContext';
 import { useHistory } from "react-router-dom";
 
 import './css/loginform.css'
 
 import { useTranslation } from 'react-i18next';
 
-function LoginForm( { setLoggedIn } ) {
-  const [inputs, setInputs] = useState({});
-  const [loading, setLoading] = useState(false);
+function LoginForm() {
+  const { user, setUser } = useContext(AuthContext);
+  const [inputs] = useState({});
 
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const history = useHistory();
 
@@ -23,8 +24,6 @@ function LoginForm( { setLoggedIn } ) {
   }
 
   const authUser = (user) => {
-    console.log(`Authenticating ... ${user}`);
-    setLoading(true);
     const authUserReq = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -33,8 +32,9 @@ function LoginForm( { setLoggedIn } ) {
     fetch('/login', authUserReq)
       .then(res => res.json())
       .then(token => {
-        sessionStorage.setItem('token', token.accessToken);
-        setLoggedIn(true);
+        user.token = token.accessToken;
+        setUser(user);
+        sessionStorage.setItem('user', JSON.stringify(user));
         history.push('/');
       })
       .catch(e => console.log(e));
@@ -52,7 +52,7 @@ function LoginForm( { setLoggedIn } ) {
               <Form.Control type="password" placeholder="Password"
                   onChange={e => { inputs.password = e.target.value }} />
           </Form.Group>
-          <Button variant="primary" type="submit" onClick={() => handleSubmit()}>
+          <Button variant="primary" type="submit" onClick={handleSubmit}>
               {t('btn.login')}
           </Button>
     </div>

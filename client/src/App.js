@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -13,6 +13,7 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 
 import './App.css';
 
+import { AuthContext } from "./context/AuthContext";
 import Navbar from './components/Navbar';
 import MonitorMap from './components/MonitorMap';
 import PlantDetails from './components/PlantDetails';
@@ -26,20 +27,21 @@ import PieChart from "./components/reports/PieChart";
 import VerticalBar from "./components/reports/VerticalBar";
 import ScatterChart from "./components/reports/ScatterChart";
 
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 
 function App() {
-  const { t, i18n } = useTranslation();
-  const [loggedIn, setLoggedIn] = useState(sessionStorage.getItem('token') ? true : false);
+  // const { t, i18n } = useTranslation();
+  const [user, setUser] = useState(JSON.parse(sessionStorage.getItem('user')));
 
   return (
+    <AuthContext.Provider value={ { user, setUser } }>
     <Router>
       <Navbar />
       <div className="container">
         <Switch>
           <Route path="/login">
             <div className="main-pane">
-                <LoginForm setLoggedIn={ setLoggedIn } />
+                <LoginForm />
             </div>
           </Route>
           <Route path="/about">
@@ -47,20 +49,20 @@ function App() {
                 <About />
             </div>
           </Route>
-          {loggedIn ? <Route path="/plants/:number">
+          {user ? <Route path="/plants/:number">
             <div className="description-pane">
               <PlantDetails />
             </div>
           </Route> : <Redirect to='/login' /> }
           <Route path="/plants">
-          {loggedIn ? 
+          {user ? 
             <div className="description-pane">
               <PlantDetails />
             </div>
            : <Redirect to='/login' /> }
            </Route>
            <Route path="/reports">
-          {loggedIn ? 
+          {user ? 
             <div className="main-pane reports-pane">
                 <LineChart />
                 <PieChart />
@@ -70,34 +72,35 @@ function App() {
            : <Redirect to='/login' /> }
            </Route>
            <Route path="/manage">
-          {loggedIn ? 
+          {user ? 
             <div className="main-pane manage-pane">
               <ManagementPane />
             </div>
            : <Redirect to='/login' /> }
            </Route>
            <Route path="/bigdata">
-          {loggedIn ? 
+          {user ? 
             <div className="main-pane home-blockchain">
                 <ComingSoon />
             </div>
            : <Redirect to='/login' /> }
            </Route>
            <Route path="/blockchain">
-          {loggedIn ? 
+          {user ? 
             <div className="main-pane home-about">
                 <ComingSoon />
             </div>
            : <Redirect to='/login' /> }
            </Route>
            <Route path="/">
-          {loggedIn ? 
+          {user ? 
             <MonitorMap />
            : <Redirect to='/login' /> }
            </Route>
         </Switch>
       </div>
     </Router>
+      </AuthContext.Provider>
   );
 }
 
