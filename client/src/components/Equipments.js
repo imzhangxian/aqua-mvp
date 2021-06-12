@@ -65,7 +65,7 @@ function Equipments() {
       .catch(e => console.log(e));
   }
 
-  const getEquipments = () => {
+  useEffect(() => {
     fetch('/api/equipments/', {
       headers: {
         'Content-Type': 'application/json',
@@ -79,11 +79,7 @@ function Equipments() {
       .catch(e => {
         console.log(e);
       });
-  }
-
-  useEffect(() => {
-    getEquipments();
-  }, [loading]);
+  }, [user, loading]);
 
   return (
     <div className="aqua-item-list">

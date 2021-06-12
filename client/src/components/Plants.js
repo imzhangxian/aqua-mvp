@@ -93,9 +93,7 @@ function Plants() {
       });
   }
 
-  useEffect(() => {
-    getPlants();
-  }, [loading]);
+  useEffect(getPlants, [user, loading]);
 
   return (
     <div className="aqua-item-list">

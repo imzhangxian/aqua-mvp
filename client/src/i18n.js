@@ -20,6 +20,7 @@ const resources = {
             "label.password": "Password",
             "btn.login": "Login",
             "btn.logout": "Logout",
+            "alert.login.failed": "Login failed!",
             "Tab plants": "Plants",
             "Tab facilities": "Facilities",
             "Tab equipments": "Equipments",
@@ -77,6 +78,7 @@ const resources = {
             "label.password": "密码",
             "btn.login": "登录",
             "btn.logout": "退出",
+            "alert.login.failed": "登录失败！",
             "Tab plants": "厂区",
             "Tab facilities": "设施",
             "Tab equipments": "设备",
@@ -112,11 +114,7 @@ const resources = {
             "Fourth": "四次处理", 
             "title.selectPlants": "选择厂区", 
             "title.about": "关于智慧水务",
-            "content.about": "智慧水务云平台通过数据采集设备、无线网络设备、智能采集终端、\
-            水质检测传感器、压力传感器、流量计、智能水表等在线监测设备实时感知城市供排水系统的运行状态，\
-            并采用可视化的方式有机整合水务管理部门与供排水设施，并通过大数据分析技术将采集到的海量水务信\
-            息进行分析与处理，生成水力模型并做出相应的处理结果辅助决策建议，实现从水源地到水龙头，水龙头\
-            再到排污口全闭环管理流程，以更加精细和动态的方式实现水务系统的智慧管理。",
+            "content.about": "智慧水务云平台通过数据采集设备、无线网络设备、智能采集终端、水质检测传感器、压力传感器、流量计、智能水表等在线监测设备实时感知城市供排水系统的运行状态，            并采用可视化的方式有机整合水务管理部门与供排水设施，并通过大数据分析技术将采集到的海量水务信            息进行分析与处理，生成水力模型并做出相应的处理结果辅助决策建议，实现从水源地到水龙头，水龙头再到排污口全闭环管理流程，以更加精细和动态的方式实现水务系统的智慧管理。",
             "about.more": "了解更多 >>", 
             "title.comingsoon": "敬请期待",
             "content.comingsoon": "筹划中，敬请期待",

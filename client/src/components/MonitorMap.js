@@ -65,7 +65,7 @@ function MonitorMap() {
     .catch(e => {
       console.log(e);
     });
-  }, []);
+  }, [user]);
 
   return (
     <div className="main-map-container">

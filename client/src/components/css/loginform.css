@@ -1,5 +1,8 @@
 .login-form {
-    margin: 1em auto auto;
+    margin-top: 1em;
+    margin-bottom: auto;
+    margin-left: 1em;
+    margin-right: 1em;
     padding: 1em 1em;
     border: 1px solid grey;
     border-radius: 5px;
@@ -7,4 +10,9 @@
 
 .form-group {
     margin-bottom: 1em;
+}
+
+.btn-login {
+    margin-top: 1.5em;
+    width: 100%;
 }

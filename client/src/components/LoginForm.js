@@ -62,7 +62,7 @@ function LoginForm() {
 
   return (
     <div className="login-form">
-          {failed && <p className="alert alert-danger"> Login Failed </p>}
+          {failed && <p className="alert alert-danger"> {t('alert.login.failed')} </p>}
           <Form.Group controlId="login-username">
               <Form.Label>{t('label.username')}</Form.Label>
               <Form.Control type="text" placeholder="Username/email"
@@ -73,7 +73,7 @@ function LoginForm() {
               <Form.Control type="password" placeholder="Password"
                   onChange={e => { inputs.password = e.target.value }} />
           </Form.Group>
-          <Button variant="primary" type="submit" onClick={handleSubmit}>
+          <Button variant="primary" type="submit" className="btn-login" onClick={handleSubmit}>
               {t('btn.login')}
           </Button>
     </div>
