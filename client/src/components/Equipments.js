@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Button, Table, Modal, Form } from 'react-bootstrap'
+import { AuthContext } from '../context/AuthContext'
 
 import './css/manage.css'
 import { useTranslation } from 'react-i18next';
@@ -9,6 +10,8 @@ function Equipments() {
   const [equipments, setEquipments] = useState([]);
   const [inputs] = useState({});
   const [loading, setLoading] = useState(false);
+
+  const { user } = useContext(AuthContext);
 
   const { t } = useTranslation();
 
@@ -30,7 +33,13 @@ function Equipments() {
 
   const handleDelete = (id => {
     setLoading(true);
-    fetch(`/api/equipments/${id}`, {method: 'DELETE'})
+    fetch(`/api/equipments/${id}`, {
+      method: 'DELETE', 
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${user.token}`
+      }
+    })
       .then(res => res.json())
       .then(data => {
         setLoading(false);
@@ -42,7 +51,10 @@ function Equipments() {
     setLoading(true);
     const createEquipReq = {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${user.token}`
+      },
       body: JSON.stringify(equip)
     };
     fetch('/api/equipments/', createEquipReq)
@@ -54,7 +66,12 @@ function Equipments() {
   }
 
   const getEquipments = () => {
-    fetch('/api/equipments/')
+    fetch('/api/equipments/', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${user.token}`
+      }
+    })
       .then(res => res.json())
       .then(equipments => {
         setEquipments(equipments);

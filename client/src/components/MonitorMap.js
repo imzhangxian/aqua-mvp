@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import ReactMapGL, {
   Popup,
   NavigationControl,
@@ -12,6 +12,7 @@ import './css/MonitorMap.css'
 
 import PulsatingDot from './PulsatingDot';
 import MessagePanel from './MessagePanel'
+import { AuthContext } from '../context/AuthContext'
 
 function MonitorMap() {
   const [plants, setPlants] = useState([]);
@@ -23,6 +24,8 @@ function MonitorMap() {
   });
 
   const [popupInfo, setPopupInfo] = useState(null);
+
+  const { user } = useContext(AuthContext);
   
   const geolocateStyle = {
     top: 0,
@@ -49,7 +52,12 @@ function MonitorMap() {
   };  
 
   useEffect(() => {
-    fetch('/api/plants')
+    fetch('/api/plants', { 
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${user.token}`
+      }
+    })
     .then(res => res.json())
     .then(plants => {
       setPlants(plants)

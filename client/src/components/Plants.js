@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Button, Table, Modal, Form } from 'react-bootstrap'
+import { AuthContext } from '../context/AuthContext'
 
 import './css/manage.css'
 import { useTranslation } from 'react-i18next';
@@ -9,6 +10,8 @@ function Plants() {
   const [plants, setPlants] = useState([]);
   const [inputs] = useState({});
   const [loading, setLoading] = useState(false);
+
+  const { user } = useContext(AuthContext);
 
   const { t } = useTranslation();
 
@@ -41,7 +44,13 @@ function Plants() {
 
   const handleDelete = (id => {
     setLoading(true);
-    fetch(`/api/plants/${id}`, {method: 'DELETE'})
+    fetch(`/api/plants/${id}`, {
+      method: 'DELETE', 
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${user.token}`
+      }
+      })
       .then(res => res.json())
       .then(data => {
         setLoading(false);
@@ -54,7 +63,10 @@ function Plants() {
     setLoading(true);
     const createPlantReq = {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${user.token}`
+      },
       body: JSON.stringify(plant)
     };
     fetch('/api/plants/', createPlantReq)
@@ -66,7 +78,12 @@ function Plants() {
   }
 
   const getPlants = () => {
-    fetch('/api/plants/')
+    fetch('/api/plants/', {
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': `Bearer ${user.token}`
+        }
+      })
       .then(res => res.json())
       .then(plants => {
         setPlants(plants);

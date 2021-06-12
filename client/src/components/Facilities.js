@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Button, Table, Modal, Form } from 'react-bootstrap'
+import { AuthContext } from '../context/AuthContext'
 
 import './css/manage.css'
 
@@ -10,6 +11,8 @@ function Facilities() {
   const [facilities, setFacilities] = useState([]);
   const [ inputs ] = useState({});
   const [loading, setLoading] = useState(false);
+
+  const { user } = useContext(AuthContext);
 
   const { t } = useTranslation();
 
@@ -28,7 +31,13 @@ function Facilities() {
 
   const handleDelete = (id => {
     setLoading(true);
-    fetch(`/api/facilities/${id}`, {method: 'DELETE'})
+    fetch(`/api/facilities/${id}`, {
+      method: 'DELETE', 
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${user.token}`
+      }
+    })
       .then(res => res.json())
       .then(data => {
         setLoading(false);
@@ -41,7 +50,10 @@ function Facilities() {
     setLoading(true);
     const createFacilityReq = {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${user.token}`
+      },
       body: JSON.stringify(facility)
     };
     fetch('/api/facilities/', createFacilityReq)
@@ -53,7 +65,12 @@ function Facilities() {
   }
 
   const getFacilities = () => {
-    fetch('/api/facilities/')
+    fetch('/api/facilities/', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${user.token}`
+      }
+    })
       .then(res => res.json())
       .then(facilities => {
         setFacilities(facilities);
