@@ -4,14 +4,15 @@ import { useTranslation } from 'react-i18next';
 
 function MessagePanel() {
     const [showMessages, setShowMessages] = useState(false);
-    const [messages, setMessages] = useState([
-        { severity: "severe", plant: "New Plant 01", stage: "Primary", text: "exceed max capacity!!" },
-        { severity: "normal", plant: "New Plant 02", stage: "Secondary", text: "running normally." },
-        { severity: "warning", plant: "New Plant 02", stage: "Primary", text: "BOD under standard." },
-        { severity: "severe", plant: "Plant 05", stage: "Primary", text: "exceed max capacity!!" }
+    // TODO feed from server logic. dummy data first.
+    const [messages] = useState([
+        { id: 1, severity: "severe", plant: "New Plant 01", stage: "Primary", text: "exceed max capacity!!" },
+        { id: 2, severity: "normal", plant: "New Plant 02", stage: "Secondary", text: "running normally." },
+        { id: 3, severity: "warning", plant: "New Plant 02", stage: "Primary", text: "BOD under standard." },
+        { id: 4, severity: "severe", plant: "Plant 05", stage: "Primary", text: "exceed max capacity!!" }
     ]);
     
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     const messagepopup = useRef();
     const togglebutton = useRef();
@@ -48,7 +49,7 @@ function MessagePanel() {
                             } else if (message.severity === 'warning') {
                                 messageClass = "alert alert-warning";
                             }
-                            return (<li className={messageClass}>{message.plant}, {message.stage}: {message.text}</li>)
+                            return (<li className={messageClass} key={message.id}>{message.plant}, {message.stage}: {message.text}</li>)
                         })
                         }
                     </ul>

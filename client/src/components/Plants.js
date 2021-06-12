@@ -7,10 +7,10 @@ import { useTranslation } from 'react-i18next';
 function Plants() {
   const [showModal, setShowModal] = useState(false);
   const [plants, setPlants] = useState([]);
-  const [inputs, setInputs] = useState({});
+  const [inputs] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);

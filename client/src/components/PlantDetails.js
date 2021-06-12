@@ -12,7 +12,7 @@ function PlantDetails() {
   const [plant, setPlant] = useState(null);
   const [stages, setStages] = useState([]);
   const [plants, setPlants] = useState([]);
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { user } = useContext(AuthContext);
 
   let {number} = useParams();
@@ -82,7 +82,7 @@ function PlantDetails() {
       onChange={handleSelectionChange}>
       <option value="">{t('title.selectPlants')}</option>
       {plants && plants.map(p => (
-      <option value={p.number}>{p.name}</option>
+      <option key={p._id} value={p.number}>{p.name}</option>
       ))}
     </select>
     </>)}
@@ -108,21 +108,21 @@ function PlantDetails() {
             {t('label.influent')} : 
               <ul>
                 {stage.influent && 
-                Object.keys(stage.influent).map(key => (<li>{key} : {stage.influent[key]}</li>))}
+                Object.keys(stage.influent).map(key => (<li key={key}>{key} : {stage.influent[key]}</li>))}
               </ul>
             </div>
             <div className="stage-detail processing">
             {t('label.processing')} : 
               <ul>
               {stage.processing && 
-              Object.keys(stage.processing).map(key => (<li>{key} : {stage.processing[key]}</li>))}
+              Object.keys(stage.processing).map(key => (<li key={key}>{key} : {stage.processing[key]}</li>))}
               </ul>
             </div>
             <div className="stage-detail effluent">
             {t('label.effluent')} : 
               <ul>
               {stage.effluent && 
-              Object.keys(stage.effluent).map(key => (<li>{key} : {stage.effluent[key]}</li>))}
+              Object.keys(stage.effluent).map(key => (<li key={key}>{key} : {stage.effluent[key]}</li>))}
               </ul>
             </div>
           </div>

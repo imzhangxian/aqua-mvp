@@ -10,7 +10,7 @@ import './css/manage.css'
 
 function ManagementPane() {
   const [key, setKey] = useState('plants');
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <div className="management-tab">

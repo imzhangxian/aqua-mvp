@@ -11,7 +11,7 @@ function Navbar() {
     const [sidebar, setSidebar] = useState(false);
     const {user, setUser} = useContext(AuthContext);
 
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     const history = useHistory();
 
@@ -63,7 +63,7 @@ function Navbar() {
       <div ref={leftdrawer} className={sidebar ? 'left-drawer active' : 'left-drawer'}>
         <ul className="nav nav-pills nav-fill">
         {navMenu.map(item => (
-          <li className="nav-item">
+          <li className="nav-item" key={item.id}>
           <a className="nav-link" href={item.menuLink}><item.iconComponent /> {t(item.menuName)}</a>
         </li>
         ))}
