@@ -53,10 +53,12 @@ function Navbar() {
           <span className="navbar-toggler-icon"></span>
         </button>
         <span className="navbar-brand mb-0 h1">{t('Nav title')}</span>
-        {user && <button className="navbar-toggler btn-logout" type="button" onClick={handleLogout}>
-          <span>{t('btn.logout') + user.username}</span>
-        </button>
-        }        
+        {user && <>
+        <span className="username-disp">{user.name}</span>
+        <button className="navbar-toggler btn-logout" type="button" onClick={handleLogout}>
+          <span>{t('btn.logout')}</span>
+        </button></>
+        }
       </nav>
       <div ref={leftdrawer} className={sidebar ? 'left-drawer active' : 'left-drawer'}>
         <ul className="nav nav-pills nav-fill">

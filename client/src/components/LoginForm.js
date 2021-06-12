@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 function LoginForm() {
   const { user, setUser } = useContext(AuthContext);
   const [inputs] = useState({});
+  const [failed, setFailed] = useState(false);
 
   const { t } = useTranslation();
 
@@ -23,25 +24,45 @@ function LoginForm() {
     
   }
 
-  const authUser = (user) => {
+  const authUser = (inputuser) => {
     const authUserReq = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(user)
+      body: JSON.stringify(inputuser)
     };
     fetch('/login', authUserReq)
       .then(res => res.json())
-      .then(token => {
-        user.token = token.accessToken;
-        setUser(user);
-        sessionStorage.setItem('user', JSON.stringify(user));
-        history.push('/');
+      .then(data => {
+        if (data.success) {
+          console.log("login successful - " + data.user.name);
+          let user = {
+            id: data.user.id,
+            name: data.user.name,
+            role: data.user.role,
+            token: data.token
+          };
+          setUser(user);
+          sessionStorage.setItem('user', JSON.stringify(user));
+          history.push('/');
+        } else {
+          console.log("Login failed.");
+          setUser(null);
+          sessionStorage.removeItem('user');
+          setFailed(true);
+        }
+      },
+      error => {
+        console.log("login failed - " + error);
+        setUser(null);
+        sessionStorage.removeItem('user');
+        setFailed(true);
       })
       .catch(e => console.log(e));
   }
 
   return (
     <div className="login-form">
+          {failed && <p className="alert alert-danger"> Login Failed </p>}
           <Form.Group controlId="login-username">
               <Form.Label>{t('label.username')}</Form.Label>
               <Form.Control type="text" placeholder="Username/email"

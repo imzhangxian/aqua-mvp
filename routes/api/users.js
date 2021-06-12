@@ -10,7 +10,7 @@ router.post('/', (req, res) => {
     bcrypt.hash(pwdplain, 10, (err, hash) => {
         new User({
             name: req.body.name,
-            number: hash,
+            password: hash,
             role: req.body.role,
             organization: req.body.organization
         })
