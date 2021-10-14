@@ -120,11 +120,11 @@ function Plants() {
           </Form.Group>
           <Form.Group controlId="create-plant-Latitude">
             <Form.Label>{t('label.coordinate')}</Form.Label>
-            <Form.Control type="text" placeholder="Latitude (-90~90), e.g. 31.3306"
+            <Form.Control type="text" placeholder="Latitude (-90~90), e.g. 30.0956"
               onChange={e => { inputs.latitude = e.target.value }} />
           </Form.Group>
           <Form.Group controlId="create-plant-Longitude">
-            <Form.Control type="text" placeholder="Longitude (-180~180), e.g. 119.9832"
+            <Form.Control type="text" placeholder="Longitude (-180~180), e.g. 114.9799"
               onChange={e => { inputs.longitude = e.target.value }} />
           </Form.Group>
           <Form.Group controlId="create-plant-stages">

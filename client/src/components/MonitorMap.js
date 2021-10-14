@@ -18,8 +18,8 @@ function MonitorMap() {
   const [plants, setPlants] = useState([]);
 
   const [viewport, setViewport] = useState({
-    latitude: 31.3306,
-    longitude: 119.8253,
+    latitude: 30.0956,
+    longitude: 114.9799, // default location set to DaYe, Hubei
     zoom: 8
   });
 
